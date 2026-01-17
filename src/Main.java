@@ -1,18 +1,19 @@
 public class Main {
     public static void main(String[] args){
 
-        Worker worker1 = new Worker("Bob Dylan", 31, 23500d);
+        Employee worker1 = new Employee("Bob Dylan", 31, 23500d);
         System.out.println(worker1.getFullName() + " earns " + worker1.getSalary() + " a year.");
 
     }
 }
 
-class Worker {
+class Employee {
+
     private String fullName;
     private int age;
     private double salary;
 
-    public Worker(String fullName, int age, double salary) {
+    public Employee(String fullName, int age, double salary) {
         this.fullName = fullName;
         this.age = age;
         this.salary = salary;
@@ -41,4 +42,11 @@ class Worker {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+}
+
+class WarehouseWorker extends Employee {
+    public WarehouseWorker(String fullName, int age, double salary) {
+        super(fullName, age, salary);
+    }
+
 }
