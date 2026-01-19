@@ -5,6 +5,11 @@ public class Main {
         book1.registerSales(45);
         book1.displaySales();
 
+        Book book2 = new Book(55, 550, 0, 12, 10, 0.07);
+        book1.registerSales(45);
+        book1.displaySales();
+
+
 
     }
 }
