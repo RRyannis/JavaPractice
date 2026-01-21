@@ -1,107 +1,51 @@
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args){
-
-        Book book1 = new Book(10, 50, 0, 10, 5, 0.05);
-        book1.registerSales(45);
-        book1.displaySales();
-
-        Book book2 = new Book(55, 550, 0, 12, 10, 0.07);
-        book1.registerSales(45);
-        book1.displaySales();
-
-
-
+    public static void main(String[] args) {
+        SalesAssociate[] workforce = new SalesAssociate[3];
+        for (int i = 0; i < workforce.length; i++){
+            workforce[i] = new SalesAssociate("Jane Doe", 5000);
+        }
+        for (SalesAssociate salesperson: workforce){
+            salesperson.writeOutput();
+        }
     }
 }
 
-class Book {
-    private int totalSold;
-    private double totalSales;
-    private double totalDiscounts;
-    private double itemCost;
-    private int bulkQuantity;
-    private double bulkDiscount;
+class SalesAssociate{
+    private String name;
+    private double sales;
 
-    public Book(int totalSold, double totalSales, double totalDiscounts, double itemCost, int quantity, double bulkDiscount) {
-        this.totalSold = totalSold;
-        this.totalSales = totalSales;
-        this.totalDiscounts = totalDiscounts;
-        this.itemCost = itemCost;
-        this.bulkQuantity = quantity;
-        this.bulkDiscount = bulkDiscount;
+    public SalesAssociate(String name, double sales){
+        this.name = name;
+        this.sales = sales;
     }
 
-    public double getBulkDiscount() {
-        return bulkDiscount;
+    public String getName() {
+        return name;
     }
 
-    public void setBulkDiscount(int bulkDiscount) {
-        this.bulkDiscount = bulkDiscount;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getBulkQuantity() {
-        return bulkQuantity;
+    public double getSales() {
+        return sales;
     }
 
-    public void setBulkQuantity(int bulkQuantity) {
-        this.bulkQuantity = bulkQuantity;
+    public void setSales(double sales) {
+        this.sales = sales;
     }
+    public void readInput(){
+        System.out.print("Enter the name of a sales associate: ");
+        Scanner scanner = new Scanner(System.in);
+        name = scanner.nextLine();
 
-    public double getItemCost() {
-        return itemCost;
+        System.out.print("Enter the associate's sales record: ");
+        sales = scanner.nextDouble();
     }
-
-    public void setItemCost(double itemCost) {
-        this.itemCost = itemCost;
-    }
-
-    public double getTotalDiscounts() {
-        return totalDiscounts;
-    }
-
-    public void setTotalDiscounts(double totalDiscounts) {
-        this.totalDiscounts = totalDiscounts;
-    }
-
-    public double getTotalSales() {
-        return totalSales;
-    }
-
-    public void setTotalSales(double totalSales) {
-        this.totalSales = totalSales;
-    }
-
-    public int getTotalSold() {
-        return totalSold;
-    }
-
-    public void setTotalSold(int totalSold) {
-        this.totalSold = totalSold;
-    }
-
-    public void registerSales(int n){
-        if(n <= 0){
-            System.out.println("Invalid item count");
-            return;
-        }
-        double currentSale = 0;
-        double currentDiscount = 0;
-
-        if ( n >= this.bulkQuantity) {
-            currentSale = n * this.itemCost * (1 - this.bulkDiscount);
-            currentDiscount = (n * this.itemCost) - currentSale;
-        } else {
-            currentSale = n * this.itemCost;
-        }
-
-        this.totalSales += currentSale;
-        this.totalSold += n;
-        this.totalDiscounts += currentDiscount;
-    }
-
-    public void displaySales(){
-        System.out.println("Total items sold: " + this.totalSold);
-        System.out.println("Gross profit: " + this.totalSales);
-        System.out.println("Total discount: " + this.totalDiscounts);
+    public void writeOutput(){
+        System.out.println("Name: " + name);
+        System.out.println("Sales: " + sales);
     }
 }
