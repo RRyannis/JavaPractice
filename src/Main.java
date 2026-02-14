@@ -2,70 +2,39 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        SalesAssociate[] workforce = new SalesAssociate[3];
-//        for (int i = 0; i < workforce.length; i++){
-//            workforce[i] = new SalesAssociate("Jane Doe", 5000);
-//        }
-//        for (SalesAssociate salesperson: workforce){
-//            salesperson.writeOutput();
-//        }
-        int[] days = new int[10];
-        for (int count = 0; count < days.length; count++){
-            Scanner scanner = new Scanner(System.in);
-            days[count] = scanner.nextInt();
-        }
-        double averageTemp = 0;
-        int daysAboveAverage = 0;
-        double sum = 0;
+        try {
+            // Case 1: Triggering the default message
+            checkCoreTemperature(1500);
 
-        for (int day : days) {
-            sum += day;
-        }
-        averageTemp = sum / 10;
+            // Case 2: Triggering a custom message
+            // checkCoreTemperature(5000);
 
-        for (int day : days) {
-            if (day >= averageTemp){
-                daysAboveAverage++;
-            }
+        } catch (CoreBreachException e) {
+            // This catches the object you created and prints the message
+            System.out.println("ALERT: " + e.getMessage());
+        } finally {
+            System.out.println("System scan complete.");
         }
-        System.out.println("The number of days with above average temperature was: " + daysAboveAverage);
+    }
+
+    public static void checkCoreTemperature(int temp) throws CoreBreachException {
+        if (temp > 1000 && temp < 4000) {
+            // Throwing the default constructor version
+            throw new CoreBreachException();
+        } else if (temp >= 4000) {
+            // Throwing the version with a custom string
+            throw new CoreBreachException("CRITICAL FAILURE: Core melting at " + temp + " degrees!");
+        } else {
+            System.out.println("Temperature stable at " + temp);
+        }
     }
 }
 
-//class SalesAssociate{
-//    private String name;
-//    private double sales;
-//
-//    public SalesAssociate(String name, double sales){
-//        this.name = name;
-//        this.sales = sales;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public double getSales() {
-//        return sales;
-//    }
-//
-//    public void setSales(double sales) {
-//        this.sales = sales;
-//    }
-//    public void readInput(){
-//        System.out.print("Enter the name of a sales associate: ");
-//        Scanner scanner = new Scanner(System.in);
-//        name = scanner.nextLine();
-//
-//        System.out.print("Enter the associate's sales record: ");
-//        sales = scanner.nextDouble();
-//    }
-//    public void writeOutput(){
-//        System.out.println("Name: " + name);
-//        System.out.println("Sales: " + sales);
-//    }
-//}
+class CoreBreachException extends Exception{
+    public CoreBreachException(){
+        super("Core Breach! Evacuate Ship!");
+    }
+    public CoreBreachException(String message){
+        super(message);
+    }
+}
